@@ -21,6 +21,7 @@ import zagar.network.ServerConnectionSocket;
 import zagar.network.packets.PacketMove;
 import zagar.network.packets.PacketEjectMass;
 import org.jetbrains.annotations.NotNull;
+import zagar.util.Colors;
 import zagar.util.Reporter;
 import zagar.view.Cell;
 import zagar.view.Food;
@@ -55,6 +56,9 @@ public class Game {
   public static String login = DEFAULT_LOGIN;
   @NotNull
   public static HashMap<Integer, String> cellNames = new HashMap<>();
+  @NotNull
+  public static HashMap<Integer,Colors> playerColors = new HashMap<>();
+
   public static long fps = 60;
   public static boolean rapidEject;
   @NotNull

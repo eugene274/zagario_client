@@ -5,6 +5,7 @@ import java.util.Collections;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import protocol.CommandReplicate;
+import zagar.util.Colors;
 import zagar.util.JSONDeserializationException;
 import zagar.util.JSONHelper;
 import zagar.view.Cell;
@@ -29,6 +30,15 @@ public class PacketHandlerReplicate {
     for (int i = 0; i < commandReplicate.getCells().length; i++) {
       protocol.model.Cell c = commandReplicate.getCells()[i];
       gameCells[i] = new Cell(c.getX(), c.getY(), c.getSize(), c.getCellId(), c.isVirus());
+
+      // COLORIZATION
+      Colors color = Colors.DEEP_PURPLE;
+      if (c.getPlayerId() != -1) {
+        Game.playerColors.putIfAbsent(c.getPlayerId(), Colors.getRandom());
+        color = Game.playerColors.get(c.getPlayerId());
+      }
+      gameCells[i].setColor(color.getR(), color.getG(), color.getB());
+
       if(c.getPlayerId() == Game.playerID){
         log.debug("Player cell added");
         Game.playerCIDs.add(c.getCellId());
