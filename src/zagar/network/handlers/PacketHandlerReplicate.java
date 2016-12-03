@@ -24,19 +24,23 @@ public class PacketHandlerReplicate {
       return;
     }
 
-    if(Game.playerID == 0){
-      log.warn("Player ID seems to be uninitialized");
-    }
-
     Cell[] gameCells = new Cell[commandReplicate.getCells().length];
+    Game.playerCells.clear();
     for (int i = 0; i < commandReplicate.getCells().length; i++) {
       protocol.model.Cell c = commandReplicate.getCells()[i];
       gameCells[i] = new Cell(c.getX(), c.getY(), c.getSize(), c.getCellId(), c.isVirus());
+      if(c.getPlayerId() == Game.playerID){
+        log.debug("Player cell added");
+        Game.playerCIDs.add(c.getCellId());
+      }
     }
 
-    Game.playerCells.clear();
-    Collections.addAll(Game.playerCells, gameCells);
+    if(Game.playerID == 0 && Game.playerCIDs.size() == 0){
+      log.warn("playerID might be uninitialized");
+    }
+
     Game.cells = gameCells;
+
 
     //TODO
 /*    if (b == null) return;
