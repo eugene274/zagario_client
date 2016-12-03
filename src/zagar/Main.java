@@ -1,7 +1,7 @@
 package zagar;
 
 import org.jetbrains.annotations.NotNull;
-import ticker.Tickable;
+import zagar.ticker.Tickable;
 import zagar.view.GameFrame;
 
 public class Main implements Tickable {

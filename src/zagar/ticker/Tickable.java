@@ -1,4 +1,4 @@
-package ticker;
+package zagar.ticker;
 
 /**
  * Created by apomosov on 14.05.16.

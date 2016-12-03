@@ -1,6 +1,6 @@
 package zagar;
 
-import ticker.Ticker;
+import zagar.ticker.Ticker;
 
 public class GameThread extends Thread implements Runnable {
   public GameThread() {
