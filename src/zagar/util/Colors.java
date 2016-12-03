@@ -37,6 +37,6 @@ public enum  Colors {
     @NotNull
     private static Random generator = new Random();
     public static Colors getRandom(){
-        return Colors.values()[generator.nextInt()];
+        return Colors.values()[generator.nextInt(values().length)];
     }
 }
