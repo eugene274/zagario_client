@@ -147,6 +147,14 @@ public class Cell {
     }
   }
 
+  public float getRotationAngle() {
+    return rotationAngle;
+  }
+
+  public void setRotationAngle(float rotationAngle) {
+    this.rotationAngle = rotationAngle;
+  }
+
   @Override
   public String toString() {
     return "Cell{" +

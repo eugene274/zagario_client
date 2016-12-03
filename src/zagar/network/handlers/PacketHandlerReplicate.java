@@ -30,6 +30,13 @@ public class PacketHandlerReplicate {
     for (int i = 0; i < commandReplicate.getCells().length; i++) {
       protocol.model.Cell c = commandReplicate.getCells()[i];
       gameCells[i] = new Cell(c.getX(), c.getY(), c.getSize(), c.getCellId(), c.isVirus());
+      // ROTATION FIX
+      for (Cell c2: Game.cells){
+        if(c2 != null && c2.id == c.getCellId()){
+          gameCells[i].setRotationAngle(c2.getRotationAngle());
+          break;
+        }
+      }
 
       // COLORIZATION
       Colors color = Colors.DEEP_PURPLE;
