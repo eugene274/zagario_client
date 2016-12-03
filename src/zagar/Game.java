@@ -24,7 +24,6 @@ import org.jetbrains.annotations.NotNull;
 import zagar.util.Colors;
 import zagar.util.Reporter;
 import zagar.view.Cell;
-import zagar.view.Food;
 import zagar.view.GameFrame;
 
 import static zagar.GameConstants.*;
@@ -35,7 +34,7 @@ public class Game {
   @NotNull
   public static volatile Cell[] cells = new Cell[0];
   @NotNull
-  public static volatile Food[] foods = new Food[0];
+  public static volatile Cell[] foods = new Cell[0];
   public static int playerID = 0;
   @NotNull
   public static ConcurrentLinkedDeque<Cell> playerCells = new ConcurrentLinkedDeque<>();

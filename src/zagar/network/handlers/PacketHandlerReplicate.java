@@ -58,6 +58,16 @@ public class PacketHandlerReplicate {
 
     Game.cells = gameCells;
 
+    Cell[] foods = new Cell[commandReplicate.getFood().length];
+    for(int i = 0; i < commandReplicate.getFood().length; i++){
+      protocol.model.Food f = commandReplicate.getFood()[i];
+      foods[i] = new Cell(f.getX(), f.getY(), 10f, -1, false);
+      foods[i].setRotating(false);
+      foods[i].setColor(Colors.CYAN.getR()/2, Colors.CYAN.getG()/2, Colors.CYAN.getB()/2);
+    }
+
+    Game.foods = foods;
+
 
     //TODO
 /*    if (b == null) return;

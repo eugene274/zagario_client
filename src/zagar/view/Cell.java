@@ -24,6 +24,7 @@ public class Cell {
   public int mass;
   private final boolean virus;
   private float rotationAngle = 0;
+  private boolean rotating = true;
 
   public Cell(double x, double y, float size, int id, boolean isVirus) {
     this.x = x;
@@ -41,7 +42,10 @@ public class Cell {
     this.yRender -= (this.yRender - y) / 5f;
     this.sizeRender -= (this.sizeRender - size) / 9f;
     this.mass = Math.round((this.sizeRender * this.sizeRender) / 100);
-    this.rotationAngle += (1f / (Math.max(this.mass, 20) * 2));
+
+    if(isRotating()) {
+      this.rotationAngle += (1f / (Math.max(this.mass, 20) * 2));
+    }
 
     if (Game.cellNames.containsKey(this.id)) {
       this.name = Game.cellNames.get(this.id);
@@ -153,6 +157,14 @@ public class Cell {
 
   public void setRotationAngle(float rotationAngle) {
     this.rotationAngle = rotationAngle;
+  }
+
+  public boolean isRotating() {
+    return rotating;
+  }
+
+  public void setRotating(boolean rotating) {
+    this.rotating = rotating;
   }
 
   @Override

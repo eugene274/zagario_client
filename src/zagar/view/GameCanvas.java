@@ -79,6 +79,12 @@ public class GameCanvas extends JPanel {
 
     g.setFont(fontCells);
 
+    for(Cell c: Game.foods){
+      if(c != null){
+        c.render(g, 1);
+      }
+    }
+
     for (int i2 = 0; i2 < Game.cells.length; i2++) {
       Cell cell = Game.cells[i2];
       if (cell != null) {
@@ -88,6 +94,8 @@ public class GameCanvas extends JPanel {
         }
       }
     }
+
+
 
     g.setFont(font);
 
