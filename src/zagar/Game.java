@@ -23,6 +23,7 @@ import zagar.network.packets.PacketEjectMass;
 import org.jetbrains.annotations.NotNull;
 import zagar.util.Reporter;
 import zagar.view.Cell;
+import zagar.view.Food;
 import zagar.view.GameFrame;
 
 import static zagar.GameConstants.*;
@@ -32,6 +33,8 @@ public class Game {
   private static final Logger log = LogManager.getLogger(Game.class);
   @NotNull
   public static volatile Cell[] cells = new Cell[0];
+  @NotNull
+  public static volatile Food[] foods = new Food[0];
   @NotNull
   public static ConcurrentLinkedDeque<Cell> player = new ConcurrentLinkedDeque<>();
   @NotNull

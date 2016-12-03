@@ -10,7 +10,6 @@ import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
 import java.awt.image.BufferedImage;
-import java.util.ConcurrentModificationException;
 
 public class Cell {
   public double x, y;
@@ -24,7 +23,7 @@ public class Cell {
   public double yRender;
   public int mass;
   private final boolean virus;
-  private float rotation = 0;
+  private float rotationAngle = 0;
 
   public Cell(double x, double y, float size, int id, boolean isVirus) {
     this.x = x;
@@ -42,7 +41,7 @@ public class Cell {
     this.yRender -= (this.yRender - y) / 5f;
     this.sizeRender -= (this.sizeRender - size) / 9f;
     this.mass = Math.round((this.sizeRender * this.sizeRender) / 100);
-    this.rotation += (1f / (Math.max(this.mass, 20) * 2));
+    this.rotationAngle += (1f / (Math.max(this.mass, 20) * 2));
 
     if (Game.cellNames.containsKey(this.id)) {
       this.name = Game.cellNames.get(this.id);
@@ -81,25 +80,25 @@ public class Cell {
       int massRender = (int) ((this.size * this.size) / 100);
       if (virus) {
         Polygon hexagon = new Polygon();
-        int a = 2 * (massRender / 8 + 10);
-        a = Math.min(a, 100);
-        for (int i = 0; i < a; i++) {
+        int verges = 2 * (massRender / 8 + 10);
+        verges = Math.min(verges, 100);
+        for (int i = 0; i < verges; i++) {
           float pi = 3.14f;
           int spike = 0;
           if (i % 2 == 0) {
             spike = (int) (20 * Math.min(Math.max(1, (massRender / 80f)), 8) * Game.zoom);
           }
-          hexagon.addPoint((int) (x + ((size + spike) / 2) * Math.cos(-rotation + i * 2 * pi / a)) + size / 2, (int) (y + ((size + spike) / 2) * Math.sin(-rotation + i * 2 * pi / a)) + size / 2);
+          hexagon.addPoint((int) (x + ((size + spike) / 2) * Math.cos(-rotationAngle + i * 2 * pi / verges)) + size / 2, (int) (y + ((size + spike) / 2) * Math.sin(-rotationAngle + i * 2 * pi / verges)) + size / 2);
         }
         g.fillPolygon(hexagon);
       } else {
         Polygon hexagon = new Polygon();
-        int a = massRender / 20 + 5;
-        a = Math.min(a, 50);
-        for (int i = 0; i < a; i++) {
+        int verges = massRender / 20 + 5;
+        verges = Math.min(verges, 50);
+        for (int i = 0; i < verges; i++) {
           float pi = 3.14f;
-          int pointX = (int) (x + (size / 2) * Math.cos(rotation + i * 2 * pi / a)) + size / 2;
-          int pointY = (int) (y + (size / 2) * Math.sin(rotation + i * 2 * pi / a)) + size / 2;
+          int pointX = (int) (x + (size / 2) * Math.cos(rotationAngle + i * 2 * pi / verges)) + size / 2;
+          int pointY = (int) (y + (size / 2) * Math.sin(rotationAngle + i * 2 * pi / verges)) + size / 2;
           hexagon.addPoint(pointX, pointY);
         }
         g.fillPolygon(hexagon);
