@@ -23,6 +23,11 @@ public class PacketHandlerReplicate {
       e.printStackTrace();
       return;
     }
+
+    if(Game.playerID == 0){
+      log.warn("Player ID seems to be uninitialized");
+    }
+
     Cell[] gameCells = new Cell[commandReplicate.getCells().length];
     for (int i = 0; i < commandReplicate.getCells().length; i++) {
       protocol.model.Cell c = commandReplicate.getCells()[i];

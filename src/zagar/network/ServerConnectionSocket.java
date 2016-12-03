@@ -72,7 +72,7 @@ public class ServerConnectionSocket {
         new PacketHandlerAuthFail(msg);
         break;
       case CommandAuthOk.NAME:
-        new PacketHandlerAuthOk();
+        new PacketHandlerAuthOk(msg);
         break;
     }
   }
