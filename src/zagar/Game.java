@@ -35,13 +35,14 @@ public class Game {
   public static volatile Cell[] cells = new Cell[0];
   @NotNull
   public static volatile Food[] foods = new Food[0];
+  public static int playerID = 0;
   @NotNull
-  public static ConcurrentLinkedDeque<Cell> player = new ConcurrentLinkedDeque<>();
+  public static ConcurrentLinkedDeque<Cell> playerCells = new ConcurrentLinkedDeque<>();
   @NotNull
   public static String[] leaderBoard = new String[10];
   public static double maxSizeX, maxSizeY, minSizeX, minSizeY;
   @NotNull
-  public static ArrayList<Integer> playerID = new ArrayList<>();
+  public static ArrayList<Integer> playerCIDs = new ArrayList<>();
   public static float followX;
   public static float followY;
   public static double zoom;
@@ -139,12 +140,12 @@ public class Game {
     log.info("[TICK]");
     ArrayList<Integer> toRemove = new ArrayList<>();
 
-    for (int i : playerID) {
+    for (int i : playerCIDs) {
       for (Cell c : Game.cells) {
         if (c != null) {
-          if (c.id == i && !player.contains(c)) {
+          if (c.id == i && !playerCells.contains(c)) {
             log.info("Centered cell " + c.name);
-            player.add(c);
+            playerCells.add(c);
             toRemove.add(i);
           }
         }
@@ -152,13 +153,13 @@ public class Game {
     }
 
     for (int i : toRemove) {
-      playerID.remove(playerID.indexOf(i));
+      playerCIDs.remove(playerCIDs.indexOf(i));
     }
 
-    if (socket.session != null && player.size() > 0) {
+    if (socket.session != null && playerCells.size() > 0) {
       float totalSize = 0;
       int newScore = 0;
-      for (Cell c : player) {
+      for (Cell c : playerCells) {
         totalSize += c.size;
         newScore += (c.size * c.size) / 100;
       }
@@ -183,14 +184,14 @@ public class Game {
         float avgY = 0;
         totalSize = 0;
 
-        for (Cell c : Game.player) {
+        for (Cell c : Game.playerCells) {
           avgX += c.x;
           avgY += c.y;
           totalSize += c.size;
         }
 
-        avgX /= Game.player.size();
-        avgY /= Game.player.size();
+        avgX /= Game.playerCells.size();
+        avgY /= Game.playerCells.size();
 
         float x = avgX;
         float y = avgY;

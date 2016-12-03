@@ -1,12 +1,9 @@
 package zagar.network.handlers;
 
-import java.nio.ByteBuffer;
 import java.util.Collections;
 
-import com.google.gson.JsonObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import protocol.CommandLeaderBoard;
 import protocol.CommandReplicate;
 import zagar.util.JSONDeserializationException;
 import zagar.util.JSONHelper;
@@ -32,8 +29,8 @@ public class PacketHandlerReplicate {
       gameCells[i] = new Cell(c.getX(), c.getY(), c.getSize(), c.getCellId(), c.isVirus());
     }
 
-    Game.player.clear();
-    Collections.addAll(Game.player, gameCells);
+    Game.playerCells.clear();
+    Collections.addAll(Game.playerCells, gameCells);
     Game.cells = gameCells;
 
     //TODO
@@ -47,8 +44,8 @@ public class PacketHandlerReplicate {
         if (c != null) {
           if (c.id == b.getInt(offset + 4)) {
             Game.cells[i2] = null;
-            if (Game.player.contains(c)) {
-              Game.player.remove(c);
+            if (Game.playerCells.contains(c)) {
+              Game.playerCells.remove(c);
             }
             System.out.println("Removing " + c.id + " <" + c.name + ">");
             break;
@@ -72,8 +69,8 @@ public class PacketHandlerReplicate {
         if (c != null) {
           if (c.id == b.getInt(offset)) {
             Game.cells[i2] = null;
-            if (Game.player.contains(c)) {
-              Game.player.remove(c);
+            if (Game.playerCells.contains(c)) {
+              Game.playerCells.remove(c);
             }
             System.out.println("Removing(2) " + c.id + " <" + c.name + ">");
             break;

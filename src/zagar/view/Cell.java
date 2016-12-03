@@ -49,7 +49,7 @@ public class Cell {
   }
 
   public void render(@NotNull Graphics2D g, float scale) {
-    if (Game.player.size() > 0) {
+    if (Game.playerCells.size() > 0) {
       Color color = new Color(this.r, this.g, this.b);
       if (scale == 1) {
         color = new Color((int) (this.r / 1.3), (int) (this.g / 1.3), (int) (this.b / 1.3));
@@ -60,15 +60,15 @@ public class Cell {
       float avgX = 0;
       float avgY = 0;
 
-      for (Cell c : Game.player) {
+      for (Cell c : Game.playerCells) {
         if (c != null) {
           avgX += c.xRender;
           avgY += c.yRender;
         }
       }
 
-      avgX /= Game.player.size();
-      avgY /= Game.player.size();
+      avgX /= Game.playerCells.size();
+      avgY /= Game.playerCells.size();
 
       int x = (int) ((this.xRender - avgX) * Game.zoom) + GameFrame.size.width / 2 - size / 2;
       int y = (int) ((this.yRender - avgY) * Game.zoom) + GameFrame.size.height / 2 - size / 2;
