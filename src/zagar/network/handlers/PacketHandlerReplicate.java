@@ -44,7 +44,7 @@ public class PacketHandlerReplicate {
         Game.playerColors.putIfAbsent(c.getPlayerId(), Colors.getRandom());
         color = Game.playerColors.get(c.getPlayerId());
       }
-      gameCells[i].setColor(color.getR(), color.getG(), color.getB());
+      gameCells[i].setColor(color);
 
       if(c.getPlayerId() == Game.playerID){
         log.debug("Player cell added");
@@ -64,7 +64,7 @@ public class PacketHandlerReplicate {
       foods[i] = new Cell(f.getX(), f.getY(), 10f, -1, false);
       foods[i].setRotating(false);
       foods[i].setStaticVerges(20);
-      foods[i].setColor(Colors.CYAN.getR()/2, Colors.CYAN.getG()/2, Colors.CYAN.getB()/2);
+      foods[i].setColor(Colors.CYAN);
     }
 
     Game.foods = foods;

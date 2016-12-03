@@ -3,6 +3,7 @@ package zagar.view;
 import org.jetbrains.annotations.NotNull;
 import zagar.Game;
 import zagar.Main;
+import zagar.util.Colors;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -152,6 +153,10 @@ public class Cell {
     if (b < 0) {
       this.b = b + 256;
     }
+  }
+
+  public void setColor(@NotNull Colors color){
+    setColor(color.getR(),color.getG(),color.getB());
   }
 
   public float getRotationAngle() {
