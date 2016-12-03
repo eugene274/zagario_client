@@ -23,8 +23,11 @@ public class Cell {
   public double yRender;
   public int mass;
   private final boolean virus;
+
   private float rotationAngle = 0;
   private boolean rotating = true;
+
+  private int staticVerges;
 
   public Cell(double x, double y, float size, int id, boolean isVirus) {
     this.x = x;
@@ -84,7 +87,7 @@ public class Cell {
       int massRender = (int) ((this.size * this.size) / 100);
       if (virus) {
         Polygon hexagon = new Polygon();
-        int verges = 2 * (massRender / 8 + 10);
+        int verges = staticVerges != 0? staticVerges : 2 * (massRender / 8 + 10);
         verges = Math.min(verges, 100);
         for (int i = 0; i < verges; i++) {
           float pi = 3.14f;
@@ -97,7 +100,7 @@ public class Cell {
         g.fillPolygon(hexagon);
       } else {
         Polygon hexagon = new Polygon();
-        int verges = massRender / 20 + 5;
+        int verges = staticVerges != 0? staticVerges : massRender / 20 + 5;
         verges = Math.min(verges, 50);
         for (int i = 0; i < verges; i++) {
           float pi = 3.14f;
@@ -165,6 +168,10 @@ public class Cell {
 
   public void setRotating(boolean rotating) {
     this.rotating = rotating;
+  }
+
+  public void setStaticVerges(int staticVerges) {
+    this.staticVerges = staticVerges;
   }
 
   @Override

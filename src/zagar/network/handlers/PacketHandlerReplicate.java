@@ -63,6 +63,7 @@ public class PacketHandlerReplicate {
       protocol.model.Food f = commandReplicate.getFood()[i];
       foods[i] = new Cell(f.getX(), f.getY(), 10f, -1, false);
       foods[i].setRotating(false);
+      foods[i].setStaticVerges(20);
       foods[i].setColor(Colors.CYAN.getR()/2, Colors.CYAN.getG()/2, Colors.CYAN.getB()/2);
     }
 
