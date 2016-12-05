@@ -179,6 +179,10 @@ public class Cell {
     this.staticVerges = staticVerges;
   }
 
+  public float getSize() {
+    return size;
+  }
+
   @Override
   public String toString() {
     return "Cell{" +

@@ -198,11 +198,14 @@ public class Game {
 
         float x = avgX;
         float y = avgY;
-        x += (float) ((GameFrame.mouseX - GameFrame.size.width / 2) / zoom);
-        y += (float) ((GameFrame.mouseY - GameFrame.size.height / 2) / zoom);
+        x = (float) ((GameFrame.mouseX - GameFrame.size.width / 2) / zoom);
+        y = (float) ((GameFrame.mouseY - GameFrame.size.height / 2) / zoom);
+
         followX = x;
         followY = y;
-        (new PacketMove(x, y)).write(socket.session);
+
+        float size = playerCells.stream().map(Cell::getSize).reduce(Math::max).orElse(1f);
+        (new PacketMove(x/Math.max(Math.abs(x)/10f, size), y/Math.max(Math.abs(y)/10f, size))).write(socket.session);
 
         if (rapidEject) {
           new PacketEjectMass().write();
