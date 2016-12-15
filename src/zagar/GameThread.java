@@ -9,7 +9,7 @@ public class GameThread extends Thread implements Runnable {
 
   @Override
   public void run() {
-    Ticker ticker = new Ticker(new Main(), 60);
+    Ticker ticker = new Ticker(new Main(), 30);
     ticker.loop();
 
     /*while (true) {
