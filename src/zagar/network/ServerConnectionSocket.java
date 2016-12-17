@@ -74,6 +74,9 @@ public class ServerConnectionSocket {
       case CommandAuthOk.NAME:
         new PacketHandlerAuthOk(msg);
         break;
+      case CommandCellNames.NAME:
+        new PacketHandlerCellNames(msg);
+        break;
     }
   }
 }
