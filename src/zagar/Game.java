@@ -69,6 +69,8 @@ public class Game {
   @NotNull
   public AuthClient authClient = new AuthClient();
 
+  // if i don't want to fuckup
+
   public Game() {
     this.gameServerUrl = "ws://" + (JOptionPane.showInputDialog(null, "Host", DEFAULT_GAME_SERVER_HOST + ":" + DEFAULT_GAME_SERVER_PORT));
 

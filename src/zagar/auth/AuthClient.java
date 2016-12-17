@@ -12,6 +12,7 @@ import java.io.IOException;
 import static zagar.GameConstants.DEFAULT_ACCOUNT_SERVER_HOST;
 import static zagar.GameConstants.DEFAULT_ACCOUNT_SERVER_PORT;
 
+// if i don't want to fuckup
 public class AuthClient {
   @NotNull
   private static final Logger log = LogManager.getLogger(AuthClient.class);
