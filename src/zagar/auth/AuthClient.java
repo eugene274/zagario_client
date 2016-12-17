@@ -17,7 +17,7 @@ public class AuthClient {
   @NotNull
   private static final Logger log = LogManager.getLogger(AuthClient.class);
   @NotNull
-  private static final String SERVICE_URL = "http://" + DEFAULT_ACCOUNT_SERVER_HOST + ":" + DEFAULT_ACCOUNT_SERVER_PORT;
+  private static String serviceUrl = "http://" + DEFAULT_ACCOUNT_SERVER_HOST + ":" + DEFAULT_ACCOUNT_SERVER_PORT;
   @NotNull
   private final OkHttpClient client = new OkHttpClient();
 
@@ -29,7 +29,7 @@ public class AuthClient {
         String.format("user=%s&password=%s", user, password)
     );
 
-    String requestUrl = SERVICE_URL + "/auth/register";
+    String requestUrl = serviceUrl + "/auth/register";
     Request request = new Request.Builder()
         .url(requestUrl)
         .post(body)
@@ -54,7 +54,7 @@ public class AuthClient {
         mediaType,
         String.format("user=%s&password=%s", user, password)
     );
-    String requestUrl = SERVICE_URL + "/auth/login";
+    String requestUrl = serviceUrl + "/auth/login";
     Request request = new Request.Builder()
         .url(requestUrl)
         .post(body)
@@ -79,7 +79,7 @@ public class AuthClient {
         mediaType,
         ""
     );
-    String requestUrl = SERVICE_URL + "/auth/logout";
+    String requestUrl = serviceUrl + "/auth/logout";
     Request request = new Request.Builder()
         .url(requestUrl)
         .post(body)
@@ -94,6 +94,9 @@ public class AuthClient {
       log.warn("Something went wrong in logout.", e);
       return false;
     }
+  }
+  public static void setServiceUrl(String serviceUrl){
+    AuthClient.serviceUrl=serviceUrl;
   }
 }
 
